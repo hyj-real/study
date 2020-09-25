@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+            background:#B3CDE3;
+        }
+        .tooltip{
+  			font-family:simsun;
+  			font-size:16px;
+  			width:120;
+  			height:auto;
+  			position:absolute; 
+  			text-align:center;
+  			border-style:solid;
+  			border-width:1px;
+  			background-color:white;
+  			border-radius:5px;	
+  		}
+		.axixs path,.axixs line{
+			fill:none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+		.axixs{
+			font-size: 8px;
+        }
+        #item{
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            margin-left: 950px;
+            margin-top: 10px;
+            text-align:center;
+            border-style:solid;
+  			border-width:3px;
+  			background-color:#B3CDE3;
+  			border-radius:5px;
+            font-family:simsun;
+            font-size:9px;
+            overflow-y:auto
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div style="display: flex;" id="Party_line">
+        <div id="party_line"></div>
+        <div id="item">
+		</div>
+    </div>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script src="https://d3js.org/d3.v3.js"></script>
+	<script type="text/javascript">
+		var dataset=[[1923, 0], [1927, 137.0], [1928, -0.224], [1930, 1.718], [1949, 35.697], [1956, 1.003], [1978, 2.051], [2000, 1.352], [2003, 0.058], [2008, 0.112], [2012, 0.216], [2013, -0.061], [2014, 0.013], [2015, 0.011], [2016, 0.016], [2017, -0.007], [2018, 0.012], [2019, 0.015]]
+        var time=[1923, 1927, 1928, 1930, 1949, 1956, 1978, 2000, 2003, 2008, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
+		var rate=[0, 137, -0.224, 1.718, 35.697, 1.003, 2.051, 1.352, 0.058, 0.112, 0.216, -0.061, 0.013, 0.011, 0.016, -0.007, 0.012, 0.015];
+		var color=["#FF0000","#4169E1","#ADD8E6","#fed9a6","#8B4513","#FFE4E1","#FFA07A","#FFDAB9","#ADFF2F"];
+        var Data=[
+    {
+        "time": "1923",
+        "rate": -0.958,
+        "num": 0.042,
+        "type": [
+            [
+                "工人",
+                0.0164
+            ],
+            [
+                "其他",
+                0.0263
+            ]
+        ]
+    },
+    {
+        "time": "1927",
+        "rate": 4.796,
+        "num": 5.796,
+        "type": [
+            [
+                "工人",
+                2.944
+            ],
+            [
+                "农民",
+                1.084
+            ],
+            [
+                "学生",
+                1.107
+            ],
+            [
+                "军人",
+                0.1796
+            ],
+            [
+                "其他",
+                0.481
+            ]
+        ]
+    },
+    {
+        "time": "1928",
+        "rate": 3.5,
+        "num": 4.5,
+        "type": [
+            [
+                "工人",
+                0.45
+            ],
+            [
+                "农民",
+                3.42
+            ],
+            [
+                "其他",
+                0.63
+            ]
+        ]
+    },
+    {
+        "time": "1930",
+        "rate": 11.23,
+        "num": 12.23,
+        "type": [
+            [
+                "工人",
+                0.673
+            ],
+            [
+                "农民",
+                9.368
+            ],
+            [
+                "其他",
+                2.189
+            ]
+        ]
+    },
+    {
+        "time": "1949",
+        "rate": 447.8,
+        "num": 448.8,
+        "type": [
+            [
+                "工人",
+                11.2
+            ],
+            [
+                "农民",
+                267.6
+            ],
+            [
+                "军人",
+                107.6
+            ],
+            [
+                "其他",
+                62.4
+            ]
+        ]
+    },
+    {
+        "time": "1956",
+        "rate": 897.9,
+        "num": 898.9,
+        "type": [
+            [
+                "工人",
+                110.0
+            ],
+            [
+                "农民",
+                654.8
+            ],
+            [
+                "军人",
+                134.1
+            ]
+        ]
+    },
+    {
+        "time": "1978",
+        "rate": 2741.511,
+        "num": 2742.511,
+        "type": [
+            [
+                "工人",
+                692.654
+            ],
+            [
+                "农民",
+                1735.888
+            ],
+            [
+                "军人",
+                254.799
+            ],
+            [
+                "其他",
+                59.17
+            ]
+        ]
+    },
+    {
+        "time": "2000",
+        "rate": 6450.51,
+        "num": 6451.51,
+        "type": [
+            [
+                "工人",
+                2128.83
+            ],
+            [
+                "农民",
+                2064.32
+            ],
+            [
+                "其他",
+                2258.36
+            ]
+        ]
+    },
+    {
+        "time": "2003",
+        "rate": 6825.2,
+        "num": 6826.2,
+        "type": [
+            [
+                "工人",
+                794.2
+            ],
+            [
+                "农民",
+                2217.0
+            ],
+            [
+                "其他",
+                1815.0
+            ],
+            [
+                "公司人员",
+                2000.0
+            ]
+        ]
+    },
+    {
+        "time": "2008",
+        "rate": 7586.6,
+        "num": 7587.6,
+        "type": [
+            [
+                "工人",
+                733.6
+            ],
+            [
+                "农民",
+                2361.2
+            ],
+            [
+                "公司人员",
+                1324.1
+            ],
+            [
+                "党政人员",
+                620.8
+            ],
+            [
+                "学生",
+                201.4
+            ],
+            [
+                "其他",
+                918.3
+            ],
+            [
+                "退休",
+                1428.2
+            ]
+        ]
+    },
+    {
+        "time": "2012",
+        "rate": 9227.4,
+        "num": 9228.4,
+        "type": [
+            [
+                "工人",
+                725.0
+            ],
+            [
+                "农民",
+                2534.8
+            ],
+            [
+                "公司人员",
+                2735.3
+            ],
+            [
+                "党政人员",
+                715.7
+            ],
+            [
+                "学生",
+                290.5
+            ],
+            [
+                "其他",
+                673.3
+            ],
+            [
+                "退休",
+                1553.8
+            ]
+        ]
+    },
+    {
+        "time": "2013",
+        "rate": 8667.6,
+        "num": 8668.6,
+        "type": [
+            [
+                "工人",
+                734.3
+            ],
+            [
+                "农民",
+                2570.3
+            ],
+            [
+                "公司人员",
+                2096.8
+            ],
+            [
+                "党政人员",
+                730.3
+            ],
+            [
+                "学生",
+                260.4
+            ],
+            [
+                "其他",
+                687.4
+            ],
+            [
+                "退休",
+                1589.1
+            ]
+        ]
+    },
+    {
+        "time": "2014",
+        "rate": 8778.2,
+        "num": 8779.2,
+        "type": [
+            [
+                "工人",
+                734.2
+            ],
+            [
+                "农民",
+                2593.7
+            ],
+            [
+                "公司人员",
+                2154.8
+            ],
+            [
+                "党政人员",
+                739.7
+            ],
+            [
+                "学生",
+                224.7
+            ],
+            [
+                "其他",
+                710.5
+            ],
+            [
+                "退休",
+                1621.6
+            ]
+        ]
+    },
+    {
+        "time": "2015",
+        "rate": 8874.8,
+        "num": 8875.8,
+        "type": [
+            [
+                "工人",
+                724.4
+            ],
+            [
+                "农民",
+                2602.5
+            ],
+            [
+                "公司人员",
+                2205.9
+            ],
+            [
+                "党政人员",
+                748.5
+            ],
+            [
+                "学生",
+                203.4
+            ],
+            [
+                "其他",
+                733.0
+            ],
+            [
+                "退休",
+                1658.1
+            ]
+        ]
+    },
+    {
+        "time": "2016",
+        "rate": 9020.3,
+        "num": 9021.3,
+        "type": [
+            [
+                "工人",
+                709.2
+            ],
+            [
+                "农民",
+                2596.0
+            ],
+            [
+                "公司人员",
+                2331.7
+            ],
+            [
+                "党政人员",
+                756.2
+            ],
+            [
+                "学生",
+                187.0
+            ],
+            [
+                "其他",
+                748.5
+            ],
+            [
+                "退休",
+                1692.7
+            ]
+        ]
+    },
+    {
+        "time": "2017",
+        "rate": 8955.3,
+        "num": 8956.3,
+        "type": [
+            [
+                "工人",
+                664.8
+            ],
+            [
+                "农民",
+                2549.9
+            ],
+            [
+                "公司人员",
+                2304.2
+            ],
+            [
+                "党政人员",
+                754.2
+            ],
+            [
+                "学生",
+                178.8
+            ],
+            [
+                "其他",
+                750.4
+            ],
+            [
+                "退休",
+                1754.0
+            ]
+        ]
+    },
+    {
+        "time": "2018",
+        "rate": 9058.5,
+        "num": 9059.5,
+        "type": [
+            [
+                "工人",
+                651.4
+            ],
+            [
+                "农民",
+                2544.3
+            ],
+            [
+                "公司人员",
+                2380.7
+            ],
+            [
+                "党政人员",
+                756.4
+            ],
+            [
+                "学生",
+                180.5
+            ],
+            [
+                "其他",
+                731.4
+            ],
+            [
+                "退休",
+                1814.8
+            ]
+        ]
+    },
+    {
+        "time": "2019",
+        "rate": 9190.6,
+        "num": 9191.6,
+        "type": [
+            [
+                "工人",
+                644.5
+            ],
+            [
+                "农民",
+                2556.1
+            ],
+            [
+                "公司人员",
+                2450.7
+            ],
+            [
+                "党政人员",
+                767.8
+            ],
+            [
+                "学生",
+                196.0
+            ],
+            [
+                "其他",
+                710.4
+            ],
+            [
+                "退休",
+                1866.1
+            ]
+        ]
+    }
+];
+		
+		//"党的第一次全国代表大会","制定第一部《中国共产党章程》"
+        var pointevent=[["第一次国共合作"],
+                        ["南昌起义",
+                        "八七会议",
+                        "井冈山革命根据地建立"],
+                        [],
+                        ["中央红军开始长征",
+                        "遵义会议",
+                        "国共第二次合作",
+                        "七次全国代表大会举行",
+                        "重庆谈判",
+                        "三大战役"],
+                        ["党的七届二中全会召开",
+                        "开国大典",
+                        "第一届全国人民代表大会"],
+                        ["文化大革命"],
+                        ["党的十一届三中全会",
+                        "创建经济特区",
+                        "建设有中国特色的社会主义",
+                        "社会主义初级阶段理论",
+                        "邓小平视察南方"],
+                        ["三个代表"],
+                        ["科学发展观写入党章"],
+                        [],
+                        ["党的十八大"],
+                        [],
+                        [],
+                        ["中国抗战胜利70周年纪念日阅兵"]];
+        
+        var content= [
+                [
+                    {
+                    "number":0,
+                    "type": "pic",
+                    "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M03/11/26/wKhThVdzQdAEAAAAAAAAAAAAAAA960.jpg",
+                    "title": "第一次国共合作",
+                    "desc": "中国共产党于1923年6月12日至20日在广州召开第三次全国代表大会。大会决定采取党内合作的形式同国民党建立联合战线，确定共产党员以个人身份加入国民党的方针。三大以后，国共合作的步伐大大加快。",
+                    "timeStart":"1923-06-12",
+                    "timeEnd": "1923-06-20"
+                    }
+                ],
+                [{
+                    "number":1,
+                    "type": "pic",
+                    "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M07/12/2E/wKhThldyV7MEAAAAAAAAAAAAAAA149.jpg",
+                    "title": "南昌起义",
+                    "desc": "1927年8月1日，以周恩来为书记的前敌委员会及贺龙、叶挺、朱德、刘伯承等人，率领党掌握或影响下的北伐军二万多人在南昌举行起义。南昌起义打响了武装反抗国民党反动派的第一枪，标志着中国共产党独立地领导革命战争、创建人民军队和武装夺取政权的开始。",
+
+                    "timeStart":"1927-08-01",
+                    "timeEnd":""
+                },
+                {
+                    "number":2,
+                    "type": "pic",
+                    "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M02/10/D0/wKhThVdyXA8EAAAAAAAAAAAAAAA445.jpg",
+                    "title": "八七会议",
+                    "desc": "1927年8月7日，中共中央在汉口召开“八七会议”。会议确定了土地革命和武装反抗国民党反动派的总方针，选举了临时中央政治局，结束了陈独秀右倾机会主义路线的统治。 ",
+
+                    "timeStart":"1927-08-07",
+                    "timeEnd":""
+                },
+                {
+                    "number":3,
+                    "type": "pic",
+                    "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M08/34/F8/wKhTgldzgJsEAAAAAAAAAAAAAAA681.jpg",
+                    "title": "井冈山革命根据地建立",
+                    "desc": "1927年10月，毛泽东率秋收起义部队到达井冈山，开始了创建中国第一个农村革命根据地——井冈山革命根据地的斗争。井冈山革命根据地的创建，为中国革命武装夺取政权开辟了一条农村包围城市，最后夺取城市直至全国胜利的正确道路。",
+
+                    "timeStart":"1927-10",
+                    "timeEnd":""
+                }],
+                [],
+                [{
+                "number":4,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M07/0E/CB/wKhThVds4vYEAAAAAAAAAAAAAAA401.jpg",
+                "title": "中央红军开始长征",
+                "desc": "1934年10月，中央红军为了摆脱国民党军队的“围剿”，被迫实行战略大转移，退出中央根据地进行长征。长征是人类历史上的伟大奇迹， 中央红军共进行了380余次战役战斗，其间共经过11个省，翻越18座大山，跨过24条大河，走过荒无人烟的草地、翻过连绵起伏的雪山，行程约二万五千里，于1935年10月到达陕北，与陕北红军胜利会师。之后，红二方面军、红四方面军也先后进行了长征，最后，红军三个方面军于1936年10月在会宁胜利会师，结束长征，完成北上抗日的战略部署。",
+
+                "timeStart":"1934-10",
+                "timeEnd": "1936-10"
+                },
+                {
+                "number":5,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M06/12/2E/wKhTh1dyVZAEAAAAAAAAAAAAAAA695.jpg",
+                "title": "遵义会议",
+                "desc": "1935年1月7日，红军攻克遵义。当年1月15日至17日，中共中央在遵义召开了政治局扩大会议，事实上确立了以毛泽东为核心的党中央的正确领导。遵义会议标志着中国共产党在政治上开始走向成熟。遵义会议确立了中国革命的基本方针原则，从此中国共产党开始在全党范围把马克思主义基本原理同中国革命具体实际结合起来，独立自主地解决中国革命重大问题。",
+
+                "timeStart":"1935-01-15",
+                "timeEnd": "1935-01-17"
+                },
+                {
+                "number":6,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M06/11/4E/wKhThFdzhH4EAAAAAAAAAAAAAAA777.jpg",
+                "title": "国共第二次合作",
+                "desc": "1937年9月，国共两党实现第二次合作，以国共合作为主体的抗日民族统一战线正式形成。第二次国共合作是在日本对华侵略不断加深、民族危机空前严重的情况下，在中国共产党倡导的抗日民族统一战线的旗帜下，国共两党捐弃前嫌、求同存异、相忍为国、相互作出妥协的结果，是中国近代史上的重大政治事件。",
+
+                "timeStart":"1937-09",
+                "timeEnd":""
+                },
+                {
+                "number":7,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M08/35/59/wKhTg1dzhvwEAAAAAAAAAAAAAAA726.jpg",
+                "title": "中国共产党第七次全国代表大会举行",
+                "desc": "1945年4月23日至6月11日，中国共产党第七次全国代表大会在延安举行，制定党的政治路线，确立毛泽东思想在全党的指导地位，总结武装斗争、统一战线和党的建设的经验，概括了党的三大优良作风。",
+                "timeStart":"1945-04-23",
+                "timeEnd": "1945-06-11"
+                },
+                {
+                "number":8,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M02/34/DA/wKhTg1dyXYEEAAAAAAAAAAAAAAA114.jpg",
+                "title": "重庆谈判",
+                "desc": "1945年8月28日，毛泽东偕周恩来、王若飞前往重庆同国民党当局进行谈判。毛泽东亲赴重庆，充分显示中国共产党谋求和平的真诚愿望，受到全国人民的热烈欢迎和社会舆论的高度赞誉。经过四十三天复杂而艰苦的谈判，国共双方于10月10日正式签署会谈纪要，即双十协定。",
+                "timeStart":"1945-08-28",
+                "timeEnd":""
+                },
+                {
+                "number":9,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M07/10/38/wKhTh1ds9ccEAAAAAAAAAAAAAAA142.jpg",
+                "title": "三大战役",
+                "desc": "1948年9月12日至1949年1月31日，从辽沈大地到华北平原，从黄海之滨到淮河两岸，人民解放军在广袤的土地上同国民党军队展开决定中国前途命运的战略大决战。以三大战役为标志的战略决战的胜利，是中国人民解放战争史上的光辉里程碑。1949年1月31日，北平和平解放，辽沈、淮海、平津三大战役胜利结束。",
+                "timeStart":"1948-09-12",
+                "timeEnd": "1949-01-31"
+                }],
+                [{
+                "number":10,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M01/34/FF/wKhTgldziGwEAAAAAAAAAAAAAAA817.jpg",
+                "title": "党的七届二中全会召开",
+                "desc": "1949年3月5日至13日，党的七届二中全会在西柏坡召开。毛泽东向全会作了报告。会议集中讨论彻底摧毁国民党统治，夺取全国胜利，在新形势下党的工作重心实行战略转移，即从乡村转到城市的问题。",
+                "timeStart":"1949-03-05",
+                "timeEnd": "1949-03-13"
+                },
+                {
+                "number":11,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M06/32/D1/wKhTg1ds3VIEAAAAAAAAAAAAAAA097.jpg",
+                "title": "开国大典",
+                "desc": "1949年10月1日，中华人民共和国中央人民政府成立典礼，即开国大典，在北京天安门广场隆重举行。毛泽东宣读中央人民政府公告，向全世界庄严宣告伟大的中华人民共和国成立。中华人民共和国诞生了！中国的历史从此翻开了崭新的篇章。",
+                "timeStart":"1949-10-01",
+                "timeEnd":""
+                },
+            {
+                "number":12,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M07/12/B1/wKhThldzhfkEAAAAAAAAAAAAAAA866.jpg",
+                "title": "第一届全国人民代表大会",
+                "desc": "1954年9月15日至28日，第一届全国人民代表大会第一次会议举行，大会通过了我国第一部社会主义类型的宪法――《中华人民共和国宪法》，人民代表大会制度作为我国的根本政治制度正式建立。",
+                "timeStart":"1954-09-15",
+                "timeEnd": "1954-09-28"
+                }],
+                [{
+                "number":13,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M07/12/B4/wKhThldzhoYEAAAAAAAAAAAAAAA545.jpg",
+                "title": "文化大革命",
+                "desc": "1966年，正当我国基本完成调整经济的任务，开始执行发展国民经济第三个五年计划的时候，“文化大革命”发生了。1976年10月6日，中共中央政治局一举粉碎“四人帮”，全国亿万军民，随即举行盛大的集会游行，热烈庆祝粉碎“四人帮”的历史性胜利。“文化大革命”的十年内乱至此结束。",
+                "timeStart":"1966-05",
+                "timeEnd": "1976-10"
+                }],
+                [{
+                "number":14,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M06/12/1E/wKhTh1dyN4EEAAAAAAAAAAAAAAA680.jpg",
+                "title": "党的十一届三中全会",
+                "desc": "1978年12月18日至22日，中国共产党十一届三中全会在北京召开。实现了新中国成立以来党的历史上具有深远意义的伟大转折。全会形成的以邓小平为核心的中央领导集体，承担起艰巨的使命，实现了伟大的历史性转折，开创了我国社会主义事业发展的新时期。中国的改革开放新时期从此开始。",
+                "timeStart":"1978-12-18",
+                "timeEnd": "1978-12-22"
+                },
+                {
+                "number":15,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M03/11/59/wKhThFdzjdEEAAAAAAAAAAAAAAA264.jpg",
+                "title": "创建经济特区",
+                "desc": "创建经济特区是中国实行对外开放的一项重大举措。1980年8月，中国政府正式批准建立深圳经济特区，随后又在珠海、汕头、厦门建立特区，1988年4月批准设立海南省，建立海南经济特区。经济特区不仅使这些地区的经济得到快速发展，而且在推进对外开放，引进外资、先进技术及管理经验，建立社会主义市场经济体制方面，发挥了窗口、试验和排头兵作用。",
+                "timeStart":"1980-08",
+                "timeEnd":""
+                },
+                {
+                "number":16,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M00/12/B5/wKhThldzh70EAAAAAAAAAAAAAAA598.jpg",
+                "title": "建设有中国特色的社会主义",
+                "desc": "1982年9月1日至11日，中国共产党第十二次全国代表大会在北京隆重举行。邓小平在大会开幕词中，第一次提出了“把马克思主义普遍真理同我国的具体实际结合起来，走自己的道路，建设有中国特色的社会主义”的崭新命题。十二大报告制定了全面开创社会主义现代化建设新局面的奋斗纲领，确立了党在新的历史时期的总任务。",
+                "timeStart":"1982-09-01",
+                "timeEnd": "1982-09-11"
+                },
+                {
+                "number":17,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M08/11/5A/wKhThVdzj-QEAAAAAAAAAAAAAAA223.jpg",
+                "title": "社会主义初级阶段理论",
+                "desc": "1987年10月25日至11月1日，中国共产党第十三次全国代表大会在北京举行。政治报告阐明了社会主义初级阶段的理论，提出了今后经济体制改革和政治体制改革的基本方针，制定了“三步走”发展战略。",
+                "timeStart":"1987-10-25",
+                "timeEnd": "1987-11-01"
+                },
+                {
+                "number":18,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic002/M09/11/5C/wKhThFdzkMYEAAAAAAAAAAAAAAA948.jpg",
+                "title": "邓小平视察南方",
+                "desc": "1992年1月18日至2月21日，邓小平在武昌、深圳、珠海、上海等地视察，发表了重要谈话。邓小平提出，改革开放胆子要大一些。看准了的，就大胆地试，大胆地闯。",
+                "timeStart":"1992-01",
+                "timeEnd": "1992-02"
+                }],
+                [{
+                "number":19,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M02/35/66/wKhTg1dzk04EAAAAAAAAAAAAAAA783.jpg",
+                "title": "三个代表",
+                "desc": "2000年2月，江泽民在广东考察工作，提出\"三个代表\"的重要思想。2002年11月8日至14日，中共第十六次全国代表大会在北京举行。江泽民作了题为《全面建设小康社会，开创中国特色社会主义事业新局面》的报告。大会提出全面建设小康社会的奋斗目标，把“三个代表”重要思想确立为党的指导思想。",
+                "timeStart":"2000-02",
+                "timeEnd":""
+                }],
+                [{
+                "number":20,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M09/35/67/wKhTg1dzlVEEAAAAAAAAAAAAAAA534.jpg",
+                "title": "科学发展观写入党章",
+                "desc": "2007年10月15至21日，中共第十七次全国代表大会在北京举行，将科学发展观写入党章。胡锦涛作了题为《高举中国特色社会主义伟大旗帜，为夺取全面建设小康社会新胜利而奋斗》的报告。",
+                "timeStart":"2007-10-15",
+                "timeEnd": "2007-10-21"
+                }],
+                [],
+                [{
+                "number":21,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M05/12/BC/wKhThldzkYkEAAAAAAAAAAAAAAA651.jpg",
+                "title": "党的十八大",
+                "desc": "2012年11月8日至14日，党的十八大举行，明确了中国特色社会主义的总依据、总布局、总任务，对夺取中国特色社会主义新胜利作出了全面部署，号召全体中华儿女万众一心、团结奋斗，共创中国人民和中华民族更加幸福美好的未来。15日召开的十八届一中全会，选举产生25人组成的十八届中央政治局，选举习近平、李克强、张德江、俞正声、刘云山、王岐山、张高丽为中央政治局常委，选举习近平为中央委员会总书记。",
+                "timeStart":"2012-11-08",
+                "timeEnd": "2012-11-15"
+                }],
+                [],[],
+                [{
+                "number":22,
+                "type": "pic",
+                "typeData": "http://tpic.home.news.cn/xhCloudNewsPic/xhpic003/M01/12/BD/wKhThldzk1oEAAAAAAAAAAAAAAA781.jpg",
+                "title": "中国抗战胜利70周年纪念日阅兵",
+                "desc": "2015年，我国以各种形式纪念中国人民抗日战争暨世界反法西斯战争胜利70周年。9月3日，纪念大会在北京天安门广场隆重举行，并首次以盛大阅兵仪式，同世界人民一起纪念这个伟大的日子。习近平主席发表重要讲话宣布裁军30万并检阅受阅部队。",
+                "timeStart":"2015-09-03",
+                "timeEnd":""
+                }],[],[],[]
+            ]
+        
+     
+        var margin = {
+				top: 10,
+				right: 10,
+				bottom: 10,
+				left: 10
+		},
+		width = 1100 - margin.left - margin.right,
+		height = 580 - margin.top - margin.bottom;
+		var outer=[6,8,7,9,10,11,12,13,14,15,16,15.5,17,18,19,18.5,20,20];
+		var inner=0;
+
+        var svg = d3.select('#party_line').append('svg')
+			.attr('width',width)
+			.attr('height',height);
+		var padding={top:50,left:50,bottom:50}
+//画坐标
+        var xScale = d3.scale.ordinal() //序列比例尺
+                .domain(time)
+                .rangeBands([0,900]);
+
+		var yScale = d3.scale.pow()//线性比例尺
+				.exponent(0.27)
+                .domain([d3.min(rate),d3.max(rate)])
+                .range([300,0]);
+    	
+		var xaixs=d3.svg.axis()
+					.scale(xScale)
+					.orient("bottom");  
+		
+		var yaixs=d3.svg.axis()
+					.scale(yScale)
+					.orient("left");
+
+		svg.append('g')
+                .attr('class','axixs')
+				.attr("transform","translate(" + padding.left+ "," + (height/1.8-6 ) + ")")
+				.call(xaixs);
+		
+        svg.append('g')
+                .attr('class','axixs')
+				.attr("transform","translate(" + padding.left+ "," + padding.top + ")")
+				.call(yaixs);
+
+        
+		// svg.append("g")
+		// 	.append("text")
+		// 	[0]("党员增长率")
+		// 	.attr("transform","translate(" + 100+ "," + margin.top + ")")
+		// 	.attr("font","1px")
+		// 	.attr("text-anchor","end")
+		// 	.attr("dy","1em")
+        // var tooltip = d3.select("body").append("div")
+    	// 				.attr("class","tooltip") //用于css设置类样式
+    	// 				.attr("opacity",0.0);
+
+
+        
+       
+//画线段
+        var site=[];
+        var center=[];
+        for (var i=0;i<dataset.length-1;i++){
+            center.push({"x1":(xScale(dataset[i+1][0])+xScale(dataset[i][0]))/2,"y1":(yScale(dataset[i+1][1])+yScale(dataset[i][1]))/2});
+            site.push( {"x1":xScale(dataset[i][0]),"y1":yScale(dataset[i][1]),"x2":xScale(dataset[i+1][0]),"y2":yScale(dataset[i+1][1])})
+        }
+       console.log()
+        var path = svg.append("g").selectAll(".path1")
+                        .data(site)
+                        .enter()
+                        .append("path")
+                        .attr("stroke", "#778899")
+                        .attr("id",function(d,i){
+                            return "path"+i;
+                        })
+                        .attr("stroke-width", 3)
+                        .attr('transform', 'translate(' + (padding.left+25) + ',' + padding.top+ ')')
+                        .attr('d',function(d,i) {
+                                var x1 = d.x1;
+                                var y1 = d.y1;
+                                var x2 = d.x2;
+                                var y2 = d.y2;
+                                return 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2; 
+                        })
+                        .on("mouseover", function(d) {
+                                var a= d3.select(this).attr("id").substring(4)
+                                console.log(a)
+                                $("#path"+a).attr("stroke-width", 10)
+                                $("#Path"+a).attr("stroke", "#778899");
+                                $("#Path"+a).attr("stroke-width", 6);           
+                            })
+                        .on("click", function(d) {
+                                d3.select(this).attr("stroke-width", 5);	
+                                var a= d3.select(this).attr("id").substring(4);
+                                t='';
+                                console.log(content[a].length)
+                                for(var p=0;p<content[a].length;p++)
+                                {
+                                t=t+"<span><h4 style='text-align:center'>"+content[a][p]['title']+"</h4></span><br />"
+                                                +"<span><img src="+content[a][p]['typeData']+" width=250px height=200px' align='middle'></span><br/><br/>"
+                                                + "<span>"+content[a][p]['desc']+"</span><br/>"
+                                }
+
+                                $("#item").html("<div>"+t
+                                                
+                                                + "</div>")   
+                                    
+
+                                        
+                            })
+                        .on("mouseout",function(d,i){
+                            var a= d3.select(this).attr("id").substring(4)
+                                $("#path"+a).attr("stroke-width", 3);
+                                $("#Path"+a).attr("stroke-width", 1); 
+                                $("#Path"+a).attr("stroke", "black"); 
+                            })
+                       
+//画标线
+        $("#item").html("<div>"+
+                        "<span><h4 style='text-align:center'>中国共产党第一次全国代表大会在上海举行</h4></span><br />"+
+                        "<span><img src='http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M07/32/6E/wKhTglds1D4EAAAAAAAAAAAAAAA593.jpg' width=250px height=200px' align='middle'></span><br/><br/>"+
+                        "<span>1921年7月23日，中国共产党第一次全国代表大会在上海举行。在会议进行过程中，突然有法租界巡捕闯进了会场，会议被迫中断。于是，最后一天的会议，便转到了浙江嘉兴南湖的一艘游船上举行。经过讨论，大会通过了中国共产党的第一个纲领和决议，并选举产生党的领导机构——中央局。 党的一大宣告了中国共产党的正式成立。</span></br>"+
+                        "<span><h4 style='text-align:center'>制定第一部《中国共产党章程》</h4></span><br />"+
+                        "<span><img src='http://tpic.home.news.cn/xhCloudNewsPic/xhpic001/M09/35/2E/wKhTg1dzQEUEAAAAAAAAAAAAAAA957.jpg' width=250px height=200px' align='middle'></span><br/><br/>"+
+                        "<span>1922年7月16日至23日，中国共产党第二次全国代表大会在上海举行。出席大会的代表12人，代表着195名党员。大会发表了具有重大历史意义的宣言，明确提出反帝反封建的民主革命纲领，制定第一部《中国共产党章程》。</span></br>"+
+                        "</div>")   
+        var draw_line = svg.append("g").selectAll(".path")
+                            .data(center)
+                            .enter()
+                            .append("path")
+                            .attr("stroke", "black")
+                            .attr("id",function(d,i){
+                                return "Path"+i;
+                            })
+                            .attr("stroke-width", 1)
+                            .attr("fill","none")
+                            .attr('transform','translate(' + (padding.left+25) + ',' + padding.top+ ')')
+                            .attr('d',function(d,i) {
+                                var x1 = d.x1;
+                                var y1 = d.y1;
+                                if(i==0){
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-150)+' L ' +  (x1-20)+ ' ' + (y1-150)+' L ' +  (x1+20)+ ' ' + (y1-150); 
+                                }
+                                if(i==1){
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-100)+' L ' +  (x1+100)+ ' ' + (y1-100); 
+                                }
+                                if(i==3){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1+60)+' L ' +  (x1-20)+ ' ' + (y1+60)+' L ' +  (x1+50)+ ' ' + (y1+60); 
+                                }
+                                if(i==4){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-130)+' L ' +  (x1-30)+ ' ' + (y1-130)+' L ' +  (x1+30)+ ' ' + (y1-130); 
+                                }
+                                if(i==5){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1+50)+' L ' +  (x1+50)+ ' ' + (y1+50); 
+                                }
+                                if(i==6){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-50)+' L ' +  (x1-50)+ ' ' + (y1-50); 
+                                }
+                                if(i==7){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-60)+' L ' +  (x1+50)+ ' ' + (y1-60); 
+                                } 
+                                if(i==8){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-50)+' L ' +  (x1-25)+ ' ' + (y1-50)+' L ' +  (x1+25)+ ' ' + (y1-50); 
+                                } 
+                                if(i==10){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-50)+' L ' +  (x1+50)+ ' ' + (y1-50); 
+                                } 
+                                if(i==13){ 
+                                    return 'M' + x1 + ' ' + y1+ ' L ' +  x1+ ' ' + (y1-50)+' L ' +  (x1-30)+ ' ' + (y1-50)+' L ' +  (x1+30)+ ' ' + (y1-50); 
+                                }    
+                            })
+                            .on("mouseout",function(d,i){
+
+                                d3.select(this)     
+                                .attr("stroke-width", 1);
+                            })
+            
+//画文字
+        var text_site=[]
+        var line=svg.append("g").selectAll(".text")
+                    .data(pointevent)
+                    .enter()
+                    .append("text")
+                    .attr('transform',function(d,i){
+                        if(i==0)
+                        return 'translate(' + (center[i].x1+75)+ ',' +(center[i].y1-115)+ ')';
+                        if(i==1)
+                        return 'translate(' + (center[i].x1+125)+ ',' +(center[i].y1-85)+ ')';
+                        if(i==3)
+                        return 'translate(' + (center[i].x1+90)+ ',' +(center[i].y1+110)+ ')';
+                        if(i==4)
+                        return 'translate(' + (center[i].x1+80)+ ',' +(center[i].y1-115)+ ')';
+                        if(i==5)
+                        return 'translate(' + (center[i].x1+100)+ ',' +(center[i].y1+85)+ ')';
+                        if(i==6)
+                        return 'translate(' + (center[i].x1+45)+ ',' +(center[i].y1-60)+ ')';
+                        if(i==7)
+                        return 'translate(' + (center[i].x1+95)+ ',' +(center[i].y1-25)+ ')';
+                        if(i==8)
+                        return 'translate(' + (center[i].x1+85)+ ',' +(center[i].y1-15)+ ')';
+                        if(i==10)
+                        return 'translate(' + (center[i].x1+100)+ ',' +(center[i].y1-15)+ ')';
+                        if(i==13)
+                        return 'translate(' + (center[i].x1+80)+ ',' +(center[i].y1-15)+ ')';
+                    })
+                    .attr("x",function(d){
+                        if(d.length!=1){
+                           for(var j=0;j<d.length;j++){
+                                 d3.select(this).append('tspan')
+                                .attr('x', 0)
+                                .attr('dy',11)
+                                .text(d[j])
+                           }
+                        } 
+                        else {
+                            d3.select(this).append('tspan')
+                                .text(function() {
+                                    return d;
+                                })
+                        }
+                    })
+                    .attr("font-size","10px")
+                    .attr("text-anchor","middle")
+                    .attr("dy","1em")
+
+//画饼图
+
+            var tooltip = d3.select("body").append("div")
+                .attr("class","tooltip") //用于css设置类样式
+                .attr("opacity",0.0);	
+            	
+
+			var pie=d3.layout.pie()
+						.value(function(d){
+							return d[1];
+						})
+
+			for(var j=0;j<Data.length;j++){
+                var data1=Data[j]["type"];
+				var piedata=pie(Data[j]["type"]);
+				var arcs = svg.append("g").selectAll(".Path")
+								.data(piedata)
+								.enter()
+								.append("path")
+								.attr("d",d3.svg.arc()     
+									.innerRadius(0)
+									.outerRadius(function (d,i) {
+										return outer[j];
+									})
+								)
+								.attr("transform", function(d,i){
+									return "translate(" + (padding.left+25+xScale(dataset[j][0]))+ ", " + (padding.top+yScale(dataset[j][1]))+ ")";
+								})
+								.attr("stroke","black")
+								.attr("stroke-width","1px")
+								.attr("id",function(d,i){
+									//console.log(data1[i]);
+									return "Arc"+j;
+                                })
+								.attr("fill", function(d,i) {
+										if(data1[i][0]=="工人")
+											return color[0];
+										else if(data1[i][0]=="农民")
+											return color[1];
+										else if(data1[i][0]=="公司人员")
+											return color[2];
+										else if(data1[i][0]=="党政人员")
+											return color[3];
+										else if(data1[i][0]=="学生")
+											return color[4];
+										else if(data1[i][0]=="退休")
+											return color[5];
+										else if(data1[i][0]=="军人")
+											return color[6];
+										else if(data1[i][0]=="其他")
+											return color[7];
+										else
+											return "#FFEBCD";
+									})
+									.on("mouseover", function(d) {
+                                        var a= d3.select(this).attr("id").substring(3);
+										console.log(d3.select(this).attr("id"))
+                                        t=''
+                                            for(var p=0;p<Data[a]["type"].length;p++){
+                                                var t=t+Data[a]["type"][p][0]+":"+Data[a]["type"][p][1]+"<br />";
+                                            }
+                                          //  console.log(t)
+                                            tooltip.html("党员结构/(万人)"+"<br />"+"总人数"+":"+Data[a]["num"]+"<br />"
+                                                      +t  )
+                                            //设置tooltip的位置(left,top 相对于页面的距离) 
+                                                .style("left",(d3.event.pageX)+"px")
+                                                .style("top",(d3.event.pageY-20)+"px")
+                                                .style("opacity",1.0);    
+										
+									})
+								.on("mouseout", function(d) {
+									tooltip.style("opacity",0.0);
+                                })
+            }
+
+//圆环
+//设置内外半径
+
+var age=[ 
+    {"age":"30岁及以下","num":1231.5},{"age":"31～35岁","num":994.6},
+    {"age":"36～40岁","num":882.7},{"age":"41～45岁","num":864.4},
+    {"age":"46～50岁","num":936.2},{"age":"51～55岁","num":879.4},
+    {"age":"56～60岁","num":745.1},{"age":"61岁及以上","num":2657.7}
+]
+var Arc=d3.svg.arc()
+            .innerRadius(75)
+            .outerRadius(95)
+
+var pie=d3.layout.pie()
+            .value(function(d){
+                return d.num;
+            })
+            .padAngle(.02);
+
+var color1 = d3.scale.category10();
+			
+svg.append("g").selectAll(".Path")
+			.data(pie(age))
+			.enter()
+			.append("path")
+			.attr("d",Arc)
+			.attr("transform", function(d,i){
+				return "translate(" + width*0.7+ ", " + (height*0.2)+ ")";
+			})
+			.attr("fill",function(d,i){
+                return color1(i);
+            })
+            .attr("stroke-width","1px");
+            
+            
+svg.append("g").selectAll(".Path")
+			.data(pie(age))
+			.enter()           
+            .append("text")
+            .attr("text-anchor","middle")//是文字居中
+            .attr("font-size","10px")
+            .text(function(d,i){return d.data.age})
+            .attr("transform",function(d){
+                //rotate 使文字旋转扇形夹角一半的位置(也可不旋转)
+                return "translate("+(Arc.centroid(d)[0]+width*0.7)+", "+(Arc.centroid(d)[1]+height*0.2)+")"+
+                'rotate(' + ((d.startAngle+ (d.endAngle - d.startAngle)/2) * 180 / Math.PI) + ')'
+            })//调成每个文字的对应位置
+            
+
+
+svg.append("path")
+	.attr("d",d3.svg.arc()
+        .innerRadius(50)
+        .outerRadius(60)
+        .startAngle(Math.PI * 0.25)
+        .endAngle(Math.PI * 0.8)
+    )
+	.attr("transform", function(d,i){
+		return "translate(" + width*0.7+ ", " + (height*0.2)+ ")";
+    })
+	.attr("fill","#d4237a")
+    .attr("stroke-width","1px")
+    .attr("shadowColor","black")
+
+svg.append("path")
+	.attr("d",d3.svg.arc()
+        .innerRadius(50)
+        .outerRadius(60)
+        .startAngle(Math.PI * 0.96)
+        .endAngle(Math.PI * 2.1)
+    )
+	.attr("transform", function(d,i){
+		return "translate(" + width*0.7+ ", " + (height*0.2)+ ")";
+    })
+	.attr("fill","#1296db")
+    .attr("stroke-width","1px")
+
+
+            
+
+
+
+svg.append("circle")
+        .attr("r",65)
+        .attr("cx",width*0.7)
+        .attr("cy",height*0.2)
+        .attr("fill","none")
+        .attr("stroke-width",3)
+        .attr("stroke","#DEB887")
+        .attr("stroke-dasharray","5,5")
+
+svg.append("image")
+            .attr("xlink:href", "imag/男生.png")
+            .attr("x", width*0.65)
+            .attr("y", height*0.16)
+            .attr("width", 50)
+            .attr("height", 50);
+svg.append("image")
+            .attr("xlink:href", "imag/1.png")
+            .attr("x", width*0.70)
+            .attr("y", height*0.16)
+            .attr("width", 50)
+            .attr("height", 50);
+        
+        
+
+
+//画图标
+           var career=['工人',"农民","公司人员","党政人员","学生","退休","军人","其他"]
+            var margin = {'left': 8, 'right': 10, 'top': 25, 'bottom': 10}
+
+            var recthei = 15, rectwid = 40, rectpad = 20;
+
+            var  rect= svg.append('g')
+                    .attr('transform', 'translate(' + width/3.5+ ',' + height/1.5 + ')')
+
+            rect.selectAll('.rect')
+                .data(career)
+                .enter()
+                .append('rect')
+                .attr('x', function (d, i) {
+                    return margin.left + i * (rectwid + rectpad)
+                })
+                .attr('y', 0)
+                .attr('width', rectwid)
+                .attr('height', recthei)
+                .attr('fill', function (d, i) {
+                    return color[i];
+                })
+
+            svg.append('g').selectAll(".text")
+                .data(career)
+                .enter()
+                .append("text")
+                .attr('transform', 'translate(' + width/3.5+ ',' + height/1.5 + ')')
+                .attr('x', function (d, i) {
+                    if(d.length==2)
+                        return margin.left + i * (rectwid + rectpad)+7 ;
+                    else{
+                        return margin.left + i * (rectwid + rectpad)-5 ;
+                    }
+                })
+                .attr('y',  recthei + 13)
+                .text(function (d) {
+                    return d;
+                })
+                .attr('fill', 'black')
+                .attr('font-size',13)
+
+			
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		body{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	<body>
+	</body>
+	<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+	<script src="https://d3js.org/d3.v3.js"></script>
+	<script>
+		var margin = {
+						top: 73,
+						right: 10,
+						bottom: 10,
+						left: 10
+				},
+				width = 2200,
+				height = 770;
+			
+		        var svg = d3.select('body').append('svg')
+					.attr('width',width)
+					.attr('height',height);
+				var g=svg.append("g");
+				var padding={top:340,left:100,bottom:100}
+		var rect=g.append("rect")
+			.attr("x",100)
+			.attr("y",100)
+			.attr("width",100)
+			.attr("height",20)
+			.attr("fill","yellow")
+			 .transition()
+			 .duration(2000)
+			.attr("width",300)
+	
+		rect.onclick=function(){
+			console.log("q");
+		}
+	</script>
+</html>
